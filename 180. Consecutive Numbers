@@ -1,0 +1,5 @@
+select distinct(num) as Consecutivenums 
+from(
+select id,num,lead(num,1) over() as a,lead(num,2) over() as b
+from logs) tab
+where num=a and a=b
