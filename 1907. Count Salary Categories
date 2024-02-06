@@ -1,0 +1,15 @@
+with temp as (
+    select sum(income<20000) as low, sum(income >= 20000 AND income <= 50000) as avg, sum(income>50000) as
+    high 
+    from Accounts
+)
+select "Low Salary" as category, low as accounts_count
+from temp 
+union all
+select "Average Salary" as category, avg as accounts_count
+from temp 
+union all
+select "High Salary" as category, high as accounts_count
+from temp 
+
+
