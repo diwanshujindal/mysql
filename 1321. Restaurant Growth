@@ -1,0 +1,18 @@
+SELECT
+    visited_on,
+    s AS amount,
+    ROUND(s / 7, 2) AS average_amount
+FROM (
+    SELECT
+        *,
+        SUM(amount) OVER (ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND 0 FOLLOWING) AS s,row_number() over() as new
+    FROM (
+        SELECT
+            visited_on,
+            SUM(amount) AS amount
+        FROM
+            customer
+        GROUP BY 1
+    ) g
+) n
+where new>6
