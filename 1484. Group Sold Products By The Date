@@ -1,0 +1,7 @@
+SELECT 
+   sell_date
+   , count(distinct product) AS num_sold
+   , group_concat(distinct product) AS products
+   -- group_concat is a function in mySQL which returns the row values in the comma separated format.
+FROM activities
+GROUP BY sell_date;
